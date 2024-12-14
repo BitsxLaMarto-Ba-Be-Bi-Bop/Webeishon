@@ -14,3 +14,7 @@ hr{
     border: none;
     border-top: solid 1px var(--p-primary-400);
 }
+
+svg{
+    color: var(--p-primary-100);
+}

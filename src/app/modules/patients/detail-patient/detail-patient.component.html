@@ -14,17 +14,345 @@
     </main>
     <title-component title="Predictor"></title-component>
     <main class="mt-3">
-        <form [formGroup]="form">
-            <div class="grid grid-rows-4 grid-flow-col">
-                <!-- <fieldset class="flex flex-col w-[20%] px-3">
-                    <label for="email">Génere</label>
-                    <input id="email" type="text" pInputText [(ngModel)]="patient.email" [readOnly]="true"/>
+        <form [formGroup]="form" (ngSubmit)="makePrediction()" class="flex flex-col gap-4">
+            <div class="grid grid-cols-3 grid-flow-row">
+                <!-- Género -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Sex">Género</label>
+                    <p-select formControlName="Sex" [options]="_patientService.genderValues()" optionLabel="label" optionValue="value"></p-select>
                 </fieldset>
-                <fieldset class="flex flex-col w-[20%] px-3">
-                    <label for="nif">NIF</label>
-                    <input id="nif" type="text" pInputText [(ngModel)]="patient.nif" [readOnly]="true"/>
+
+                <!-- Familiar vs Esporádico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FamilialvsSporadic">Familiar vs Esporádico</label>
+                    <p-select formControlName="FamilialvsSporadic" [options]="_patientService.familiarEsporadicValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Edad al Diagnóstico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="AgeAtDiagnosis">Edad al Diagnóstico</label>
+                    <p-inputnumber formControlName="AgeAtDiagnosis" mode="decimal" [min]="0" [max]="200" />
+                </fieldset>
+
+                <!-- Diagnóstico Binario -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="BinaryDiagnosis">Diagnóstico Binario</label>
+                    <p-select formControlName="BinaryDiagnosis" [options]="_patientService.binaryDiagnosiValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Diagnóstico Final -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FinalDiagnosis">Diagnóstico Final</label>
+                    <p-inputnumber formControlName="FinalDiagnosis" mode="decimal" [min]="1" [max]="18" />
+                </fieldset>
+
+                <!-- Tabaco -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Tobacco">Tabaco</label>
+                    <p-select formControlName="Tobacco" [options]="_patientService.tobaccoValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Comorbilidades -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Comorbidities">Comorbilidades</label>
+                    <p-select formControlName="Comorbidities" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Patrón Radiológico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="RadiologicalPatter">Patrón Radiológico</label>
+                    <p-select formControlName="RadiologicalPatter" [options]="_patientService.radiologicalPatterValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Biopsia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Biopsy">Biopsia</label>
+                    <p-select formControlName="Biopsy" [options]="_patientService.biopsyValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Patrón Patológico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="PathologyPattern">Patrón Patológico</label>
+                    <p-select formControlName="PathologyPattern" [options]="_patientService.pathologyPatternValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Diagnóstico Después de la Biopsia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="DiagnosisAfterBiopsy">Diagnóstico Después de la Biopsia</label>
+                    <p-select formControlName="DiagnosisAfterBiopsy" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Comité Multidisciplinario -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="MultidsciplinaryCommittee">Comité Multidisciplinario</label>
+                    <p-select formControlName="MultidsciplinaryCommittee" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Pirfenidona -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Pirfenidone">Pirfenidona</label>
+                    <p-select formControlName="Pirfenidone" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Nintedanib -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Nintedanib">Nintedanib</label>
+                    <p-select formControlName="Nintedanib" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Tratamiento Antifibrótico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="AntifibroticDrug">Tratamiento Antifibrótico</label>
+                    <p-select formControlName="AntifibroticDrug" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Prednisona -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Prednisone">Prednisona</label>
+                    <p-select formControlName="Prednisone" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Micofenolato -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Mycophenolate">Micofenolato</label>
+                    <p-select formControlName="Mycophenolate" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Tratamiento -->
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Treatment">Tratamiento</label>
+                    <input formControlName="Treatment" type="text" id="Treatment" />
                 </fieldset> -->
+
+                <!-- Afectación Extrapulmonar -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="ExtrapulmonaryAffectation">Afectación Extrapulmonar</label>
+                    <p-select formControlName="ExtrapulmonaryAffectation" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Cáncer de Pulmón Asociado -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="AssociatedLungCancer">Cáncer de Pulmón Asociado</label>
+                    <p-select formControlName="AssociatedLungCancer" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Otros Cánceres -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="OtherCancer">Otros Cánceres</label>
+                    <p-select formControlName="OtherCancer" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Anormalidad del Conteo Sanguíneo al Diagnóstico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="BloodCountAbnormalityAtDiagnosis">Anormalidad del Conteo Sanguíneo al Diagnóstico</label>
+                    <p-select formControlName="BloodCountAbnormalityAtDiagnosis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Anemia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Anemia">Anemia</label>
+                    <p-select formControlName="Anemia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Trombocitopenia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Thrombocytopenia">Trombocitopenia</label>
+                    <p-select formControlName="Thrombocytopenia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Trombocitosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Thrombocytosis">Trombocitosis</label>
+                    <p-select formControlName="Thrombocytosis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Linfocitosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Lymphocytosis">Linfocitosis</label>
+                    <p-select formControlName="Lymphocytosis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Linfopenia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Lymphopenia">Linfopenia</label>
+                    <p-select formControlName="Lymphopenia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Neutrofilia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Neutrophilia">Neutrofilia</label>
+                    <p-select formControlName="Neutrophilia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Neutropenia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Neutropenia">Neutropenia</label>
+                    <p-select formControlName="Neutropenia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Leucocitosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Leukocytosis">Leucocitosis</label>
+                    <p-select formControlName="Leukocytosis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Leucopenia -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Leukopenia">Leucopenia</label>
+                    <p-select formControlName="Leukopenia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Enfermedad Hematológica -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="HematologicDisease">Enfermedad Hematológica</label>
+                    <p-select formControlName="HematologicDisease" [options]="_patientService.hematologicDiseaseValue()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Anomalía Hepática Antes del Diagnóstico -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="LiverAbnormalityBeforeDiagnosis">Anomalía Hepática Antes del Diagnóstico</label>
+                    <p-select formControlName="LiverAbnormalityBeforeDiagnosis" [options]="_patientService.yesNoValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Anomalía Hepática -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="LiverAbnormality">Anomalía Hepática</label>
+                    <p-select formControlName="LiverAbnormality" [options]="_patientService.yesNoValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+                
+                <!-- LDH -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="LDH">LDH</label>
+                    <p-select formControlName="LDH" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- ALT -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="ALT">ALT</label>
+                    <p-select formControlName="ALT" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- AST -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="AST">AST</label>
+                    <p-select formControlName="AST" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- ALP -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="ALP">ALP</label>
+                    <p-select formControlName="ALP" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- GGT -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="GGT">GGT</label>
+                    <p-select formControlName="GGT" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Transaminitis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Transaminitis">Transaminitis</label>
+                    <p-select formControlName="Transaminitis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Cholestasis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="Cholestasis">Cholestasis</label>
+                    <p-select formControlName="Cholestasis" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Liver Disease -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="LiverDisease">Liver Disease</label>
+                    <p-select formControlName="LiverDisease" [options]="_patientService.liverDiseaseValue()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- FVCL At Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCLAtDiagnosis">FVCL At Diagnosis</label>
+                    <p-inputnumber formControlName="FVCLAtDiagnosis" mode="decimal" [min]="0" [max]="5" />
+                </fieldset>
+
+                <!-- FVCP At Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCPAtDiagnosis">FVCP At Diagnosis</label>
+                    <p-inputnumber formControlName="FVCPAtDiagnosis" mode="decimal" [min]="0" [max]="100" />
+                </fieldset>
+
+                <!-- DLCO At Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="DLCOAtDiagnosis">DLCO At Diagnosis</label>
+                    <p-inputnumber formControlName="DLCOAtDiagnosis" mode="decimal" [min]="0" [max]="100" />
+                </fieldset>
+
+                <!-- FVCL Year After Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCLYearAfterDiagnosis">FVCL Year After Diagnosis</label>
+                    <p-inputnumber formControlName="FVCLYearAfterDiagnosis" mode="decimal" [min]="0" [max]="5" />
+                </fieldset>
+
+                <!-- FVCP Year After Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCPYearAfterDiagnosis">FVCP Year After Diagnosis</label>
+                    <p-inputnumber formControlName="FVCPYearAfterDiagnosis" mode="decimal" [min]="0" [max]="100" />
+                </fieldset>
+
+                <!-- DLCO Year After Diagnosis -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="DLCOYearAfterDiagnosis">DLCO Year After Diagnosis</label>
+                    <p-inputnumber formControlName="DLCOYearAfterDiagnosis" mode="decimal" [min]="0" [max]="100" />
+                </fieldset>
+
+                <!-- Radio Worsening 2y -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="RadioWorsening2y">Radio Worsening 2y</label>
+                    <p-select formControlName="RadioWorsening2y" [options]="_patientService.radioWorsening()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="TypeOfFamilyHistory">Type Of Family History</label>
+                    <p-select formControlName="TypeOfFamilyHistory" [options]="_patientService.familiyTypes()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- First Degree Relative -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FirstDegreeRelative">First Degree Relative</label>
+                    <p-select formControlName="FirstDegreeRelative" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Second Degree Relative -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="SecondDegreeRelative">Second Degree Relative</label>
+                    <p-select formControlName="SecondDegreeRelative" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- More Than One Degree Relative -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="MoreThanOneDegreeRelative">More Than One Degree Relative</label>
+                    <p-select formControlName="MoreThanOneDegreeRelative" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Genetic Mutation Studied In Patient -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="GeneticMutationStudiedInPatient">Genetic Mutation Studied In Patient</label>
+                    <p-select formControlName="GeneticMutationStudiedInPatient" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
+
+                <!-- Severity Of Telomere Shortening -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="SeverityOfTelomereShortening">Severity Of Telomere Shortening</label>
+                    <p-inputnumber formControlName="SeverityOfTelomereShortening" mode="decimal" [min]="1" [max]="6" />
+                </fieldset>
+
+                <!-- Progressive Disease -->
+                <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="ProgressiveDisease">Progressive Disease</label>
+                    <p-select formControlName="ProgressiveDisease" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset>
             </div>
+            <p-button class="mx-auto" type="submit">Fer predicció</p-button>
+            <p-button class="mx-auto" type="button" (onClick)="simulatePrediction()">Simular predicció</p-button>
         </form>
     </main>
 }

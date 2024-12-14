@@ -14,8 +14,8 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./core/layout/layout.component').then((m) => m.LayoutComponent),
-        canActivate: [JwtGuard],
-        resolve: { data: UserResolverService },
+        // canActivate: [JwtGuard],
+        // resolve: { data: UserResolverService },
         children: [
             {
                 path: 'dashboard',

@@ -1,0 +1,46 @@
+<div 
+    (click)="openDialog()" 
+    [ngClass]="{'bg-[var(--p-primary-200)]' : appointment.doctor_acception, 'bg-[var(--p-primary-50)] cursor-pointer': !appointment.doctor_acception}" 
+    class="w-full h-[80px] flex justify-between items-center p-4 bg-[var(--p-primary-200)] rounded-xl shadow-lg"
+    >
+    <div class="flex flex-col">
+        <span class="font-bold text-[var(--p-primary-700)]">{{ appointment.reason }}</span>
+        <span>{{ appointment.appointment_date| date:'dd-MM-yy hh:ss' }}</span>
+    </div>
+
+    @if(appointment.doctor_acception){ <i class="pi pi-calendar"></i>}
+    @else{ <i class="pi pi-clock"></i> }
+</div>
+
+<p-dialog
+    [(visible)]="isOpen"
+    [modal]="true"
+    [style]="{ width: '70%' }">
+        <ng-template #header>
+            <div class="w-full flexx flex-col">
+                <h2 class="font-bold text-[var(--p-primary-700)] text-2xl">Confirmació de cita</h2>
+                <small>Una vegada triada la opció no es podrá desfer</small>
+            </div>
+        </ng-template>
+
+        <ul class="m-auto font-bold text-center">
+            @if(patient){
+                <li>Nom: {{ patient.name }}</li>
+            }
+            <li>Día: {{appointment.appointment_date| date:'dd-MM-yy'}}</li>
+            <li>Hora: {{appointment.appointment_date| date:'hh:ss'}}</li>
+        </ul>
+
+        <ng-template #footer>
+            <footer class="w-full flex justify-evenly">
+                <p-button
+                    label="Cancel·lar cita"
+                    [text]="true"
+                    (click)="confirmAppointment(false)" />
+                <p-button
+                    label="Confirmar cita"
+                    (click)="confirmAppointment(true)"
+                  />
+            </footer>
+        </ng-template>
+</p-dialog>

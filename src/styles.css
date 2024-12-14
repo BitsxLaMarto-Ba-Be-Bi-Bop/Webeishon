@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .h-fill{
     height: -webkit-fill-available;
 }
@@ -21,6 +19,17 @@
     width: 100%;
     min-width: 250px;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--p-primary-900); 
+    border-radius: 10px;
+}
+
 /*
 
 --p-primary-50: var(--p-emerald-50);

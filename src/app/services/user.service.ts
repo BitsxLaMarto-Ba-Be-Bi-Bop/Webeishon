@@ -23,4 +23,39 @@ export class UserService {
         this.self.set(body);
         return this.self();
     }
+
+    async getUser(userId: string): Promise<User | null> {
+        const response: any = await firstValueFrom(
+            this.http.get(`${this.baseUrl}/users/${userId}`, {
+                observe: 'response',
+            }),
+        );
+        return response.body;
+    }
+
+    async loadSelfAppointments() {
+        const response = await firstValueFrom(
+            this.http.get(`${this.baseUrl}/appoinments/`, {
+                observe: 'response',
+            }),
+        );
+        return response.body;
+    }
+
+    async acceptAppointment(appointmentId: number) {
+        const response = await firstValueFrom(
+            this.http.put(`${this.baseUrl}/appoinments/${appointmentId}`, {
+                observe: 'response',
+            }),
+        );
+        return response;
+    }
+    async removeAppointment(appointmentId: number) {
+        const response = await firstValueFrom(
+            this.http.delete(`${this.baseUrl}/appoinments/${appointmentId}`, {
+                observe: 'response',
+            }),
+        );
+        return response;
+    }
 }

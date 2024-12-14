@@ -59,7 +59,7 @@ export class PatientsService {
         { label: 'UIP indeterminat', value: 'Indeterminate UIP' },
     ]);
 
-    sexValues = signal([
+    genderValues = signal([
         { label: 'Home', value: 'Male' },
         { label: 'Dona', value: 'Female' },
     ]);
@@ -199,6 +199,12 @@ export class PatientsService {
         { label: 'IPF', value: 'IPF' },
     ]);
 
+    radioWorsening = signal([
+        { label: '0', value: 0 },
+        { label: '1', value: 1 },
+        { label: '3', value: 3 },
+    ]);
+
     async getAllUntratedPatients() {
         const response = await firstValueFrom(
             this.http.get(`${this.baseUrl}/users/patients/untrated`, {
@@ -209,10 +215,7 @@ export class PatientsService {
     }
 
     async getMyPatients() {
-        console.log(this.userService.self());
-
         const id = this.userService.self()?.id;
-        console.log('id', id);
 
         const response: any = await firstValueFrom(
             this.http.get(`${this.baseUrl}/users/patients/trated/${id}`, {
@@ -224,10 +227,7 @@ export class PatientsService {
     }
 
     async getAssignmePatients(patientId: string) {
-        console.log(this.userService.self());
-
         const idDoctor = this.userService.self()?.id;
-        console.log('id', idDoctor);
 
         const response: any = await firstValueFrom(
             this.http.post(`${this.baseUrl}/users/doctors/${idDoctor}/patients/${patientId}`, {
@@ -241,6 +241,16 @@ export class PatientsService {
     async getSinglePatient(patientId: string) {
         const response: any = await firstValueFrom(
             this.http.get(`${this.baseUrl}/users/${patientId}`, {
+                observe: 'response',
+            }),
+        );
+
+        return response.body;
+    }
+
+    async makePrediction(form: { [key: string]: any }) {
+        const response: any = await firstValueFrom(
+            this.http.post(`${this.baseUrl}/predict`, form, {
                 observe: 'response',
             }),
         );

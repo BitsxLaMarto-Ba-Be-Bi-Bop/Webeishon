@@ -7,11 +7,6 @@ import { MenuItem } from 'primeng/api';
 export class SidebarService {
     doctorMenu: WritableSignal<MenuItem[]> = signal([
         {
-            label: 'Dashboard',
-            icon: 'pi-desktop',
-            routerLink: 'dashboard',
-        },
-        {
             label: 'Pacients',
             icon: 'pi-users',
             routerLink: 'patients',
