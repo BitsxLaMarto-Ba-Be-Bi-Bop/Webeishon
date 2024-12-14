@@ -1,0 +1,17 @@
+<header class="py-8">
+    <h1 class="text-center text-3xl">Inicia sessió</h1>
+</header>
+<main>
+    <form [formGroup]="form" (ngSubmit)="login()" class="m-auto flex flex-col justify-center items-center gap-4">
+        <fieldset class="flex flex-col w-[20%]">
+            <label for="email">Adreça electrónica</label>
+            <input id="email" type="text" pInputText formControlName="email" [email]="true"/>
+        </fieldset>
+        <fieldset class="flex flex-col w-[20%]">
+            <label for="password">Contrasenya</label>
+            <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true" />
+        </fieldset>
+        <p-button [disabled]="form.invalid" type="submit">Entra</p-button>
+        <span>No tens compte encara? Registra't fent click <a routerLink="/register"><u>aquí</u></a></span>
+    </form>
+</main>

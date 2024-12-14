@@ -1,0 +1,5 @@
+    <a (auxclick)="middleClick($event, item)" [class.selected]="isCurrentPage(item)" [ngClass]="{'jusify-center': !showText}" [routerLink]="item.routerLink">
+        <i class="pi" [class]="item.icon"></i>
+        @if (showText) {<span>{{item.label}}</span>}
+    </a>
+    

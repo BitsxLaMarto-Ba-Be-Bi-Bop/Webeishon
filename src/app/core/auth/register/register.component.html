@@ -1,0 +1,41 @@
+<header class="py-8">
+    <h1 class="text-center text-3xl">Crea el teu compte</h1>
+</header>
+<main>
+    <form [formGroup]="form" (ngSubmit)="register()" class="m-auto mx-3 flex flex-col items-center gap-4">
+        <div class="grid grid-rows-2 grid-flow-col">
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="name">Nom</label>
+                <input id="name" type="text" pInputText formControlName="name"/>
+            </fieldset>
+
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="nif">NIF</label>
+                <input id="nif" type="text" pInputText formControlName="nif"/>
+                @if(form.get('nif')?.errors?.['invalidDni']){
+                    <small class="text-red-600">NIF no vàlid</small>
+                }
+            </fieldset>
+
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="password">Contrasenya</label>
+                <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true" />
+            </fieldset>
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="confirmPassword">Confirma contrasenya</label>
+                <p-password id="confirmPassword" formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" />
+                @if(form.get('confirmPassword')?.errors?.['passwordMismatch']){
+                    <small class="text-red-600">Les contrasenyes no coincideixen</small>
+                }
+                
+            </fieldset>
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="email">Adreça electrónica</label>
+                <input id="email" type="text" pInputText formControlName="email" [email]="true"/>
+            </fieldset>
+        </div>
+        <span>Si ja tens compte inicia sessió fent click <a routerLink="/login"><u>aquí</u></a></span>
+        <!-- <p-button type="submit">Entra</p-button> -->
+        <p-button [disabled]="form.invalid" type="submit">Entra</p-button>
+    </form>
+</main>

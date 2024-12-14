@@ -1,0 +1,30 @@
+@if (loaded && patient) {
+    <title-component [title]="'Informe de '+patient.name"></title-component>
+    <main class="my-3">
+        <div class="grid grid-rows-1 grid-flow-col">
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="email">Adreça electrónica</label>
+                <input id="email" type="text" pInputText [(ngModel)]="patient.email" [readOnly]="true"/>
+            </fieldset>
+            <fieldset class="flex flex-col w-[20%] px-3">
+                <label for="nif">NIF</label>
+                <input id="nif" type="text" pInputText [(ngModel)]="patient.nif" [readOnly]="true"/>
+            </fieldset>
+        </div>
+    </main>
+    <title-component title="Predictor"></title-component>
+    <main class="mt-3">
+        <form [formGroup]="form">
+            <div class="grid grid-rows-4 grid-flow-col">
+                <!-- <fieldset class="flex flex-col w-[20%] px-3">
+                    <label for="email">Génere</label>
+                    <input id="email" type="text" pInputText [(ngModel)]="patient.email" [readOnly]="true"/>
+                </fieldset>
+                <fieldset class="flex flex-col w-[20%] px-3">
+                    <label for="nif">NIF</label>
+                    <input id="nif" type="text" pInputText [(ngModel)]="patient.nif" [readOnly]="true"/>
+                </fieldset> -->
+            </div>
+        </form>
+    </main>
+}

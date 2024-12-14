@@ -1,0 +1,33 @@
+/* card */
+a{
+    text-decoration: none;
+    text-transform: capitalize;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    line-height: 0px;
+    font-weight: bold;
+    color: var(--p-primary-100);
+}
+a:hover, a.selected{
+    background: var(--p-primary-100);
+    color: var(--p-primary-700);
+    transition-duration: 1s;
+}
+
+/* Icona */
+i{
+    font-weight: bold;
+    color: var(--p-primary-100);
+}
+a:hover i, a.selected i{
+    color: var(--p-primary-700);
+    transition-duration: 1s;
+}
