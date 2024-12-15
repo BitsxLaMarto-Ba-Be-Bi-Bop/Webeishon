@@ -16,33 +16,39 @@
     <main class="mt-3">
         <form [formGroup]="form" (ngSubmit)="makePrediction()" class="flex flex-col gap-4">
             <div class="grid grid-cols-3 grid-flow-row">
+                
                 <!-- Género -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="Sex">Género</label>
                     <p-select formControlName="Sex" [options]="_patientService.genderValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Familiar vs Esporádico -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="FamilialvsSporadic">Familiar vs Esporádico</label>
                     <p-select formControlName="FamilialvsSporadic" [options]="_patientService.familiarEsporadicValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Edad al Diagnóstico -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="AgeAtDiagnosis">Edad al Diagnóstico</label>
+                    <label for="AgeAtDiagnosis">
+                        Edad al Diagnóstico
+                    </label>
                     <p-inputnumber formControlName="AgeAtDiagnosis" mode="decimal" [min]="0" [max]="200" />
                 </fieldset>
 
                 <!-- Diagnóstico Binario -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="BinaryDiagnosis">Diagnóstico Binario</label>
                     <p-select formControlName="BinaryDiagnosis" [options]="_patientService.binaryDiagnosiValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Diagnóstico Final -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="FinalDiagnosis">Diagnóstico Final</label>
+                    <label for="FinalDiagnosis">
+                        Diagnóstico Final
+                        <small>Del 1 al 18</small>
+                    </label>
                     <p-inputnumber formControlName="FinalDiagnosis" mode="decimal" [min]="1" [max]="18" />
                 </fieldset>
 
@@ -59,10 +65,10 @@
                 </fieldset>
 
                 <!-- Patrón Radiológico -->
-                <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="RadiologicalPatter">Patrón Radiológico</label>
-                    <p-select formControlName="RadiologicalPatter" [options]="_patientService.radiologicalPatterValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="RadiologicalPattern">Patrón Radiológico</label>
+                    <p-select formControlName="RadiologicalPattern" [options]="_patientService.radiologicalPatterValues()" optionLabel="label" optionValue="value"></p-select>
+                </fieldset> -->
 
                 <!-- Biopsia -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -71,10 +77,10 @@
                 </fieldset>
 
                 <!-- Patrón Patológico -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="PathologyPattern">Patrón Patológico</label>
                     <p-select formControlName="PathologyPattern" [options]="_patientService.pathologyPatternValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Diagnóstico Después de la Biopsia -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -185,10 +191,10 @@
                 </fieldset>
 
                 <!-- Neutropenia -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="Neutropenia">Neutropenia</label>
                     <p-select formControlName="Neutropenia" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Leucocitosis -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -203,22 +209,22 @@
                 </fieldset>
 
                 <!-- Enfermedad Hematológica -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="HematologicDisease">Enfermedad Hematológica</label>
                     <p-select formControlName="HematologicDisease" [options]="_patientService.hematologicDiseaseValue()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Anomalía Hepática Antes del Diagnóstico -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="LiverAbnormalityBeforeDiagnosis">Anomalía Hepática Antes del Diagnóstico</label>
                     <p-select formControlName="LiverAbnormalityBeforeDiagnosis" [options]="_patientService.yesNoValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Anomalía Hepática -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="LiverAbnormality">Anomalía Hepática</label>
                     <p-select formControlName="LiverAbnormality" [options]="_patientService.yesNoValues()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
                 
                 <!-- LDH -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -263,46 +269,64 @@
                 </fieldset>
 
                 <!-- Liver Disease -->
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="LiverDisease">Liver Disease</label>
                     <p-select formControlName="LiverDisease" [options]="_patientService.liverDiseaseValue()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- FVCL At Diagnosis -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="FVCLAtDiagnosis">FVCL At Diagnosis</label>
+                    <label for="FVCLAtDiagnosis">
+                        FVCL At Diagnosis
+                        <small>Del 0 al 5</small>
+                    </label>
                     <p-inputnumber formControlName="FVCLAtDiagnosis" mode="decimal" [min]="0" [max]="5" />
                 </fieldset>
 
                 <!-- FVCP At Diagnosis -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="FVCPAtDiagnosis">FVCP At Diagnosis</label>
+                    <label for="FVCPAtDiagnosis">
+                        FVCP At Diagnosis
+                        <small>Del 0 al 100</small>
+                    </label>
                     <p-inputnumber formControlName="FVCPAtDiagnosis" mode="decimal" [min]="0" [max]="100" />
                 </fieldset>
 
                 <!-- DLCO At Diagnosis -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="DLCOAtDiagnosis">DLCO At Diagnosis</label>
+                    <label for="DLCOAtDiagnosis">
+                        DLCO At Diagnosis
+                        <small>Del 0 al 100</small>
+                    </label>
                     <p-inputnumber formControlName="DLCOAtDiagnosis" mode="decimal" [min]="0" [max]="100" />
                 </fieldset>
 
                 <!-- FVCL Year After Diagnosis -->
-                <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="FVCLYearAfterDiagnosis">FVCL Year After Diagnosis</label>
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCLYearAfterDiagnosis">
+                        FVCL Year After Diagnosis
+                        <small>Del 0 al 5</small>
+                    </label>
                     <p-inputnumber formControlName="FVCLYearAfterDiagnosis" mode="decimal" [min]="0" [max]="5" />
-                </fieldset>
+                </fieldset> -->
 
                 <!-- FVCP Year After Diagnosis -->
-                <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="FVCPYearAfterDiagnosis">FVCP Year After Diagnosis</label>
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="FVCPYearAfterDiagnosis">
+                        FVCP Year After Diagnosis
+                        <small>Del 0 al 100</small>
+                    </label>
                     <p-inputnumber formControlName="FVCPYearAfterDiagnosis" mode="decimal" [min]="0" [max]="100" />
-                </fieldset>
+                </fieldset> -->
 
                 <!-- DLCO Year After Diagnosis -->
-                <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="DLCOYearAfterDiagnosis">DLCO Year After Diagnosis</label>
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
+                    <label for="DLCOYearAfterDiagnosis">
+                        DLCO Year After Diagnosis
+                        <small>Del 0 al 100</small>
+                    </label>
                     <p-inputnumber formControlName="DLCOYearAfterDiagnosis" mode="decimal" [min]="0" [max]="100" />
-                </fieldset>
+                </fieldset> -->
 
                 <!-- Radio Worsening 2y -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -310,10 +334,10 @@
                     <p-select formControlName="RadioWorsening2y" [options]="_patientService.radioWorsening()" optionLabel="label" optionValue="value"></p-select>
                 </fieldset>
 
-                <fieldset class="flex flex-col w-[100%] px-3">
+                <!-- <fieldset class="flex flex-col w-[100%] px-3">
                     <label for="TypeOfFamilyHistory">Type Of Family History</label>
                     <p-select formControlName="TypeOfFamilyHistory" [options]="_patientService.familiyTypes()" optionLabel="label" optionValue="value"></p-select>
-                </fieldset>
+                </fieldset> -->
 
                 <!-- First Degree Relative -->
                 <fieldset class="flex flex-col w-[100%] px-3">
@@ -341,7 +365,10 @@
 
                 <!-- Severity Of Telomere Shortening -->
                 <fieldset class="flex flex-col w-[100%] px-3">
-                    <label for="SeverityOfTelomereShortening">Severity Of Telomere Shortening</label>
+                    <label for="SeverityOfTelomereShortening">
+                        Severity Of Telomere Shortening
+                        <small>Del 1 al 6</small>
+                    </label>
                     <p-inputnumber formControlName="SeverityOfTelomereShortening" mode="decimal" [min]="1" [max]="6" />
                 </fieldset>
 
@@ -351,8 +378,45 @@
                     <p-select formControlName="ProgressiveDisease" [options]="_patientService.binaryValues()" optionLabel="label" optionValue="value"></p-select>
                 </fieldset>
             </div>
-            <p-button class="mx-auto" type="submit">Fer predicció</p-button>
+            <p-button [disabled]="form.invalid" class="mx-auto" type="submit">Fer predicció</p-button>
             <p-button class="mx-auto" type="button" (onClick)="simulatePrediction()">Simular predicció</p-button>
         </form>
     </main>
 }
+@else if (loaded && !patient) {
+    <empty-elements-component icon="pi-ban" text="Usuario no encontrado"></empty-elements-component>
+}
+
+<p-dialog
+    [(visible)]="showPrediction"
+    [modal]="true"
+    [style]="{ width: '70%' }">
+        <ng-template #header>
+            <div class="w-full flexx flex-col">
+                <h2 class="font-bold text-[var(--p-primary-700)] text-2xl">Predicció</h2>
+            </div>
+        </ng-template>
+
+        <!-- 
+            - Muerte: 0-> Vive, 1 -> Muere 
+            - BinaryDiagnosis(Fibrosis pulmonar idiopàtica): 0-> NO tiene , 1-> SI tiene
+            - NecessityTransplantation: 0->NO necesita, 1 -> Si necesita
+        -->
+
+        @if(prediction){
+            <ul class="m-auto font-bold text-center">
+                <li>Predicció de vida: {{ prediction.Death ? 'Altas probabilidades de muerte' : 'Bajas probabilidades de muerte' }}</li>
+                <li>Fibrosis pulmonar idiopàtica: {{ prediction.BinaryDiagnosis ? 'Positivo' : 'Negativo' }}</li>
+                <li>Necesidad de transplante: {{ prediction.NecessityTransplantation ? 'Positivo' : 'Negativo' }}</li>
+            </ul>
+        }
+
+        <ng-template #footer>
+            <footer class="w-full flex justify-evenly">
+                <p-button
+                    label="Cerrar predicció"
+                    (click)="prediction=null;showPrediction=false;"
+                  />
+            </footer>
+        </ng-template>
+</p-dialog>

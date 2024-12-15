@@ -31,6 +31,6 @@ export class LoginComponent {
         if (!isLogged) {
             this._alertService.warning('Error al iniciar sesión', 'Error');
             return;
-        } else this.router.navigateByUrl('/dashboard');
+        } else this.router.navigateByUrl('/');
     }
 }

@@ -18,11 +18,6 @@ export const routes: Routes = [
         // resolve: { data: UserResolverService },
         children: [
             {
-                path: 'dashboard',
-                loadComponent: () =>
-                    import('./modules/dashboard/dashboard.component').then((m) => m.DashboardComponent),
-            },
-            {
                 path: 'patients',
                 loadComponent: () => import('./modules/patients/patients.component').then((m) => m.PatientsComponent),
                 children: [
@@ -52,7 +47,7 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'patients',
                 pathMatch: 'full',
             },
         ],
