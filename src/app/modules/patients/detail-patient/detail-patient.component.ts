@@ -119,6 +119,10 @@ export class DetailPatientComponent implements OnInit {
     async makePrediction() {
         const formFormatted: { [key: string]: any } = this.getFormdata();
         const resp = await this._patientService.makePrediction(formFormatted);
+        if (resp) {
+            this.prediction = resp.predictions;
+            this.showPrediction = true;
+        }
     }
 
     async simulatePrediction() {
