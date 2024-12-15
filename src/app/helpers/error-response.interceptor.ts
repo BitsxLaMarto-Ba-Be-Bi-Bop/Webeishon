@@ -15,9 +15,9 @@ export const ErrorResponseInterceptor: HttpInterceptorFn = (req: HttpRequest<any
             if (err.status === HttpStatusCode.InternalServerError)
                 _alertService.error('Torna a intentar-ho més tard', 'Error');
             else {
-                const msg = err.message;
+                const msg: any = err.error.message;
                 if (msg) _alertService.warning('', msg);
-                else _alertService.warning('', 'Error');
+                else _alertService.warning('Torna a intentar-ho de nou més tard', 'Error');
             }
 
             // if (!isPlatformServer(platformId) && err.status === HttpStatusCode.Unauthorized) {}
