@@ -123,11 +123,7 @@ export class DetailPatientComponent implements OnInit {
 
     async simulatePrediction() {
         const formFormatted: { [key: string]: any } = this.fillForm();
-        const resp = await this._patientService.makePrediction(formFormatted);
-        if (resp) {
-            this.prediction = resp.predictions;
-            this.showPrediction = true;
-        }
+        this.form.patchValue(formFormatted);
     }
 
     getFormdata(): { [key: string]: any } {
@@ -194,63 +190,116 @@ export class DetailPatientComponent implements OnInit {
 
     fillForm(): { [key: string]: any } {
         const values = {
-            // Sex: 'Male',
-            // 'FamilialvsSporadic': 'Sporadic',
-            'Age at diagnosis': 18,
-            // 'Binary diagnosis': 'No IPF',
-            'Final diagnosis': 18,
-            TOBACCO: 1,
-            Comorbidities: 1,
-            // Radiological Pattern: 1,
-            Biopsy: 1,
-            // 'Pathology pattern': 'Necrotizing vasculitis',
-            'Diagnosis after Biopsy': 1,
-            'Multidsciplinary committee': 1,
-            Pirfenidone: 1,
-            Nintedanib: 1,
-            'Antifibrotic Drug': 1,
-            Prednisone: 1,
-            Mycophenolate: 1,
-            // Treatment: 'Pirfenidone',
-            'Extrapulmonary affectation': 1,
-            'Associated lung cancer': 1,
-            'Other cancer': 1,
-            'Blood count abnormality at diagnosis': 1,
-            Anemia: 1,
-            Thrombocytopenia: 1,
-            Thrombocytosis: 1,
-            Lymphocytosis: 1,
-            Lymphopenia: 1,
-            Neutrophilia: 1,
-            // Neutropenia: 1,
-            Leukocytosis: 1,
-            Leukopenia: 1,
-            // 'Hematologic Disease': 'No',
-            // 'Liver abnormality before diagnosis': 'Yes',
-            // 'Liver abnormality': 'Yes',
-            LDH: 0,
-            ALT: 1,
-            AST: 1,
-            ALP: 0,
-            GGT: 1,
-            Transaminitis: 0,
-            Cholestasis: 1,
-            // LiverDisease: 'Fatty liver disease',
-            'FVC (L) at diagnosis': 5,
-            'FVC (%) at diagnosis': 23,
-            'DLCO (%) at diagnosis': 100,
-            // 'FVC (L) 1 year after diagnosis': 5,
-            // 'FVC (%) 1 year after diagnosis': 23,
-            // 'DLCO (%) 1 year after diagnosis': 23,
-            RadioWorsening2y: 1,
-            // 'Type of family history': 'No history',
-            '1st degree relative': 0,
-            '2nd degree relative': 1,
-            'More than 1 relative': 1,
-            'Genetic mutation studied in patient': 0,
-            'Severity of telomere shortening': 6,
-            'Progressive disease': 1,
+            AgeAtDiagnosis: this.getRandomInt(99) + 1,
+            FinalDiagnosis: this.getRandomInt(17) + 1,
+            Tobacco:
+                this._patientService.tobaccoValues()[this.getRandomInt(this._patientService.tobaccoValues().length)]
+                    .value,
+            Comorbidities:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Biopsy: this._patientService.biopsyValues()[this.getRandomInt(this._patientService.biopsyValues().length)]
+                .value,
+            DiagnosisAfterBiopsy:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            MultidsciplinaryCommittee:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Pirfenidone:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Nintedanib:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+
+            AntifibroticDrug:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Prednisone:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Mycophenolate:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            ExtrapulmonaryAffectation:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            AssociatedLungCancer:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            OtherCancer:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            BloodCountAbnormalityAtDiagnosis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Anemia: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            Thrombocytopenia:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Thrombocytosis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Lymphocytosis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Lymphopenia:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Neutrophilia:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Leukocytosis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Leukopenia:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            LDH: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            ALT: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            AST: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            ALP: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            GGT: this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                .value,
+            Transaminitis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            Cholestasis:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            FVCLAtDiagnosis: this.getRandomInt(6),
+            FVCPAtDiagnosis: this.getRandomInt(101),
+            DLCOAtDiagnosis: this.getRandomInt(101),
+            RadioWorsening2y:
+                this._patientService.radioWorsening()[this.getRandomInt(this._patientService.radioWorsening().length)]
+                    .value,
+            FirstDegreeRelative:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            SecondDegreeRelative:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            MoreThanOneDegreeRelative:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            GeneticMutationStudiedInPatient:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
+            SeverityOfTelomereShortening: this.getRandomInt(6) + 1,
+            ProgressiveDisease:
+                this._patientService.binaryValues()[this.getRandomInt(this._patientService.binaryValues().length)]
+                    .value,
         };
         return values;
+    }
+
+    getRandomInt(max: number) {
+        return Math.floor(Math.random() * max);
     }
 }
