@@ -405,16 +405,16 @@
 
         @if(prediction){
             <ul class="m-auto font-bold text-center">
-                <li>Predicció de vida: {{ prediction.Death ? 'Altas probabilidades de muerte' : 'Bajas probabilidades de muerte' }}</li>
-                <li>Fibrosis pulmonar idiopàtica: {{ prediction.BinaryDiagnosis ? 'Positivo' : 'Negativo' }}</li>
-                <li>Necesidad de transplante: {{ prediction.NecessityTransplantation ? 'Positivo' : 'Negativo' }}</li>
+                <li>Predicció de vida: {{ prediction['Death'] ? 'Altas probabilitats de mortalitat' : 'Baixes probabilitats de mortalitat' }}</li>
+                <li>Fibrosis pulmonar idiopàtica: {{ prediction['Binary diagnosis'] ? 'Positiu' : 'Negatiu' }}</li>
+                <li>Necesidad de transplante: {{ prediction['Necessity of transplantation'] ? 'Positiu' : 'Negatiu' }}</li>
             </ul>
         }
 
         <ng-template #footer>
             <footer class="w-full flex justify-evenly">
                 <p-button
-                    label="Cerrar predicció"
+                    label="Tancar predicció"
                     (click)="prediction=null;showPrediction=false;"
                   />
             </footer>

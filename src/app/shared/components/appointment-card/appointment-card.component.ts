@@ -40,7 +40,7 @@ export class AppointmentCardComponent {
         if (confirm) {
             // Se acepta la cita
             this.appointment.doctor_acception = true;
-            await this.userService.acceptAppointment(this.appointment.id);
+            await this.userService.acceptAppointment(this.appointment);
             this.appointmentChange.emit(this.appointment);
             this._alertService.success('', 'Cita confirmada correctament');
         } else {

@@ -1,17 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { User } from '../shared/interfaces/user.interface';
+import { inject, Injectable, OnInit, signal, WritableSignal } from '@angular/core';
+import { Appointment, User } from '../shared/interfaces/user.interface';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserService {
+export class UserService implements OnInit {
     private readonly http = inject(HttpClient);
     private readonly baseUrl: string = environment.apiUrl;
 
     self: WritableSignal<User | null> = signal(null);
+
+    async ngOnInit() {
+        await this.getSelf();
+    }
 
     async getSelf(): Promise<User | null> {
         const response = await firstValueFrom(
@@ -33,7 +37,7 @@ export class UserService {
         return response.body;
     }
 
-    async loadSelfAppointments() {
+    async loadAllAppointments() {
         const response = await firstValueFrom(
             this.http.get(`${this.baseUrl}/appoinments/`, {
                 observe: 'response',
@@ -42,9 +46,9 @@ export class UserService {
         return response.body;
     }
 
-    async acceptAppointment(appointmentId: number) {
+    async acceptAppointment(appointment: Appointment) {
         const response = await firstValueFrom(
-            this.http.put(`${this.baseUrl}/appoinments/${appointmentId}`, {
+            this.http.put(`${this.baseUrl}/appoinments/${appointment.id}`, appointment, {
                 observe: 'response',
             }),
         );
